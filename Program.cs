@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace entity_framework_lab;
 
 public class Program
@@ -6,6 +8,10 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        // Configura o contexto do banco de dados para usar SQLite.
+        builder.Services.AddDbContext<DAL.Contexto>(options =>
+            options.UseSqlite(builder.Configuration.GetConnectionString("ConexaoPadrao")));
+        
         // Add services to the container.
         builder.Services.AddControllersWithViews();
 
